@@ -5,5 +5,5 @@ package pe.edu.upc.appbarman.network;
  */
 
 public class NewsApiService {
-    public static String SOLESORDER_URL = "http://127.0.0.1:15000/ServiceBares.svc/Order";
+    public static String SOLESORDER_URL = "http://baresws.azurewebsites.net/ServiceBares.svc/Order";
 }
