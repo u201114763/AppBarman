@@ -12,12 +12,14 @@ import android.view.ViewGroup;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONArrayRequestListener;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.androidnetworking.interfaces.ParsedRequestListener;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+
 import java.util.List;
 
 import pe.edu.upc.appbarman.R;
@@ -48,7 +50,7 @@ public class SalesOrderFragment extends Fragment {
         salesorderRecyclerView = (RecyclerView) view.findViewById(R.id.salesorderRecyclerView);
         salesOrders = new ArrayList<>();
         salesorderAdapter = new SalesOrderAdapter(salesOrders);
-        salesorderLayoutManager = new GridLayoutManager(view.getContext(), 2);
+        salesorderLayoutManager = new GridLayoutManager(view.getContext(), 1);
         salesorderRecyclerView.setAdapter(salesorderAdapter);
         salesorderRecyclerView.setLayoutManager(salesorderLayoutManager);
         updateSources();
@@ -57,32 +59,37 @@ public class SalesOrderFragment extends Fragment {
 
 
     private void updateSources() {
-        Log.d("SEGUIMIENTO","ENTRO AL NETWORKINGGGGGGGGGG");
-        AndroidNetworking.get(NewsApiService.SOLESORDER_URL+"?Gbusqueda=1&Gvalor=&Gfecha=20171003&Glocal=1")
-                //.addQueryParameter("language", "en")
+
+        SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyyMMdd");
+        java.util.Date date = new java.util.Date();
+
+        Log.d("SEGUIMIENTO","ENTRO AL NETWORKINGGGGGGGGGG "+ DATE_FORMAT.format(date).toString());
+        String Gbusqueda = "3";
+        //String Gfecha = DATE_FORMAT.format(date).toString();
+        String Gfecha ="";
+        //String Gfecha = "20171003";
+        String Gvalor = "1";
+        String Glocal = "1";
+
+        AndroidNetworking.get(NewsApiService.SOLESORDER_URL+"?Gbusqueda="+Gbusqueda+"&Gvalor="+Gvalor+"&Gfecha="+Gfecha+"&Glocal="+Glocal)
                 .setPriority(Priority.LOW)
                 .setTag(getString(R.string.app_name))
                 .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
+                .getAsObjectList(SalesOrder.class,new ParsedRequestListener<List<SalesOrder>>()  {
                     @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            Log.d("SEGUIMIENTO","ENTRO AL RESPONSE");
-                            if ("error".equalsIgnoreCase(response.getString("status"))) {
-                                Log.d(getString(R.string.app_name), response.getString("message"));
-                                return;
-                            }
+                    public void onResponse(List<SalesOrder> salesOrders1) {
 
-                            salesOrders = SalesOrder.from(response.getJSONArray(""));
-                            salesorderAdapter.setSalesOrder(salesOrders);
-                            salesorderAdapter.notifyDataSetChanged();
-                        }
-                        catch (JSONException e) {
-                            Log.d(getString(R.string.app_name), e.getMessage());
-                        }
+                        Log.d("SEGUIMIENTO","ENTRO AL RESPONSE: " + salesOrders1.size());
+                        /*for (SalesOrder user : salesOrders1) {
+                            Log.d("SEGUIMIENTO", "id : " + user.getId().toString());
+                            Log.d("SEGUIMIENTO", "userid : " + user.getUserId());
+                        }*/
 
-
+                        salesOrders = salesOrders1;
+                        salesorderAdapter.setSalesOrder(salesOrders);
+                        salesorderAdapter.notifyDataSetChanged();
                     }
+
 
                     @Override
                     public void onError(ANError anError) {

@@ -1,18 +1,18 @@
 package pe.edu.upc.appbarman.adapters;
 
-import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.androidnetworking.widget.ANImageView;
-
 import java.util.List;
 
 import pe.edu.upc.appbarman.R;
+import pe.edu.upc.appbarman.activities.MainDetailActivity;
 import pe.edu.upc.appbarman.models.SalesOrder;
 
 /**
@@ -37,17 +37,21 @@ public class SalesOrderAdapter extends RecyclerView.Adapter<SalesOrderAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(SalesOrderAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(SalesOrderAdapter.ViewHolder holder, final int position) {
         final SalesOrder source = salesOrders.get(position);
 
         holder.idTextView.setText(source.getId());
         holder.userIdTextView.setText(source.getUserId());
         holder.orderdateTextView.setText(source.getOrderDate());
         holder.waittimerTextView.setText(source.getWaitTime());
-        holder.aboutTextView.setOnClickListener(new View.OnClickListener() {
+        holder.salesorderCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: Start About Source Activity
+                Bundle bundle = new Bundle();
+                bundle.putInt("currentPosition", position);
+                Intent detailIntent = new Intent(view.getContext(),MainDetailActivity.class);
+                detailIntent.putExtras(bundle);
+                view.getContext().startActivity(detailIntent);
             }
         });
 
@@ -69,18 +73,19 @@ public class SalesOrderAdapter extends RecyclerView.Adapter<SalesOrderAdapter.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        CardView salesorderCardView;
         TextView idTextView;
         TextView userIdTextView;
         TextView orderdateTextView;
         TextView waittimerTextView;
-        TextView aboutTextView;
+
         public ViewHolder(View itemView) {
             super(itemView);
+            salesorderCardView = (CardView) itemView.findViewById(R.id.salesorderCardView);
             idTextView = (TextView) itemView.findViewById(R.id.idTextView);
             userIdTextView = (TextView) itemView.findViewById(R.id.userIdTextView);
             orderdateTextView = (TextView) itemView.findViewById(R.id.orderdateTextView);
             waittimerTextView = (TextView) itemView.findViewById(R.id.waittimerTextView);
-            aboutTextView = (TextView) itemView.findViewById(R.id.aboutTextView);
         }
     }
 }

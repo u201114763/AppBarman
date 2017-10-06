@@ -124,7 +124,7 @@ public class SalesOrder {
                 .setAttentionTime(bundle.getString("attentionTime"))
         return salesOrder;
     }*/
-
+/*
     public static SalesOrder from(JSONObject jsonSource) {
         SalesOrder salesOrder = new SalesOrder();
         try {
@@ -141,7 +141,6 @@ public class SalesOrder {
         }
         return salesOrder;
     }
-
     public static List<SalesOrder> from(JSONArray jsonSalesOrder) {
         List<SalesOrder> salesOrders = new ArrayList<>();
         for(int i = 0; i < jsonSalesOrder.length(); i++)
@@ -151,5 +150,6 @@ public class SalesOrder {
                 e.printStackTrace();
             }
         return salesOrders;
-    }
+    }*/
+
 }
