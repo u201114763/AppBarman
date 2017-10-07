@@ -14,7 +14,11 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.ParsedRequestListener;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import pe.edu.upc.appbarman.R;
@@ -55,6 +59,7 @@ public class MainDetailActivityFragment extends Fragment {
         updateSalesOrderDetail();
         return view;
     }
+
 
 
     private void updateSalesOrderDetail() {

@@ -21,6 +21,7 @@ import java.util.List;
 import pe.edu.upc.appbarman.R;
 import pe.edu.upc.appbarman.adapters.SalesOrderAdapter;
 import pe.edu.upc.appbarman.models.SalesOrder;
+import pe.edu.upc.appbarman.models.User;
 import pe.edu.upc.appbarman.network.NewsApiService;
 
 /**
@@ -32,8 +33,6 @@ public class SalesOrderFragment extends Fragment {
     RecyclerView.LayoutManager salesorderLayoutManager;
     SalesOrderAdapter salesorderAdapter;
     List<SalesOrder> salesOrders;
-
-
 
     public SalesOrderFragment() {
     }
@@ -74,10 +73,10 @@ public class SalesOrderFragment extends Fragment {
                     @Override
                     public void onResponse(List<SalesOrder> salesOrders1) {
 
-                        Log.d("SEGUIMIENTO","Numero de Pedido:: " + salesOrders1.size());
-                        /*for (SalesOrder user : salesOrders1) {
+                       /* Log.d("SEGUIMIENTO","Numero de Pedidos:: " + salesOrders1.size());
+                        for (SalesOrder user : salesOrders1) {
                             Log.d("SEGUIMIENTO", "id : " + user.getId().toString());
-                            Log.d("SEGUIMIENTO", "userid : " + user.getUserId());
+
                         }*/
 
                         salesOrders = salesOrders1;
@@ -92,5 +91,7 @@ public class SalesOrderFragment extends Fragment {
                     }
                 });
     }
+
+
 
 }

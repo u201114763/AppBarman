@@ -22,8 +22,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:textStyle="bold"
-            android:text="N| Pedido"
-            tools:layout_editor_absoluteX="8dp" />
+            android:text="N| Pedido" />
         <TextView
             android:id="@+id/userIdTextView"
             android:layout_width="352dp"
@@ -33,10 +32,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:textStyle="bold"
-            android:text="Usuario"
-            tools:layout_editor_absoluteX="8dp" />
+            android:text="Usuario" />
         <TextView
-            android:id="@+id/orderdateTextView"
+            android:id="@+id/fullnameIdTextView"
             android:layout_width="352dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_margin"
@@ -44,8 +42,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:textStyle="bold"
-            android:text="Fecha Pedido"
-            tools:layout_editor_absoluteX="8dp" />
+            android:text="Nombre"/>
+        <TextView
+            android:id="@+id/orderdateTextView"
+            android:layout_width="352dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            app:layout_constraintTop_toBottomOf="@id/fullnameIdTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textStyle="bold"
+            android:text="Fecha Pedido" />
         <TextView
             android:id="@+id/waittimerTextView"
             android:layout_width="352dp"
@@ -55,8 +62,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:textStyle="bold"
-            android:text="Tiempo Espera"
-            tools:layout_editor_absoluteX="8dp" />
+            android:text="Tiempo Espera"/>
         <TextView
             android:id="@+id/anularTextView"
             android:layout_width="wrap_content"
@@ -66,8 +72,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:textAllCaps="true"
             android:textColor="@color/colorAccent"
-            android:text="ANULAR"
-            tools:layout_editor_absoluteX="8dp" />
+            android:text="ANULAR" />
         <TextView
             android:id="@+id/atendidoTextView"
             android:layout_width="wrap_content"
@@ -77,8 +82,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:textAllCaps="true"
             android:textColor="@color/colorAccent"
-            android:text="ATENDIDO"
-            tools:layout_editor_absoluteX="322dp" />
+            android:text="ATENDIDO"/>
 
     </android.support.constraint.ConstraintLayout>
 
