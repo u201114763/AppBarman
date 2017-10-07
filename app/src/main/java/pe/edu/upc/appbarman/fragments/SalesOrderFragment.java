@@ -17,8 +17,12 @@ import com.androidnetworking.interfaces.ParsedRequestListener;
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import pe.edu.upc.appbarman.R;
+import pe.edu.upc.appbarman.activities.MainActivity;
 import pe.edu.upc.appbarman.adapters.SalesOrderAdapter;
 import pe.edu.upc.appbarman.models.SalesOrder;
 import pe.edu.upc.appbarman.models.User;
@@ -33,6 +37,8 @@ public class SalesOrderFragment extends Fragment {
     RecyclerView.LayoutManager salesorderLayoutManager;
     SalesOrderAdapter salesorderAdapter;
     List<SalesOrder> salesOrders;
+
+    public final ScheduledExecutorService worker = Executors.newSingleThreadScheduledExecutor();
 
     public SalesOrderFragment() {
     }
@@ -49,6 +55,17 @@ public class SalesOrderFragment extends Fragment {
         salesorderRecyclerView.setAdapter(salesorderAdapter);
         salesorderRecyclerView.setLayoutManager(salesorderLayoutManager);
         updateSalesOrder();
+
+        final Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                Log.d(getString(R.string.app_name), "Mensaje");
+                updateSalesOrder();
+            }
+        };
+        ScheduledExecutorService timer = Executors.newSingleThreadScheduledExecutor();
+        timer.scheduleAtFixedRate(r, 10, 10, TimeUnit.SECONDS);
+
         return view;
     }
 
