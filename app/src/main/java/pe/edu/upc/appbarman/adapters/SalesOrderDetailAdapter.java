@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.androidnetworking.AndroidNetworking;
@@ -48,13 +49,22 @@ public class SalesOrderDetailAdapter extends RecyclerView.Adapter<SalesOrderDeta
                 .from(parent.getContext())
                 .inflate(R.layout.card_salesorderdetail, parent, false));
     }
-
     @Override
     public void onBindViewHolder(SalesOrderDetailAdapter.ViewHolder holder, final int position) {
         SalesOrderDetail salesOrderDetail = salesOrderDetails.get(position);
-        holder.pictureANImageView.setDefaultImageResId(R.mipmap.ic_launcher);
-        holder.pictureANImageView.setErrorImageResId(R.mipmap.ic_launcher);
+        //holder.pictureANImageView.setDefaultImageResId(R.mipmap.ic_launcher);
+        //holder.pictureANImageView.setErrorImageResId(R.mipmap.ic_launcher);
         //holder.pictureANImageView.setImageUrl(salesOrderDetail.getUrlToImage());
+
+        if (salesOrderDetail.getProductId().equals("1"))
+            holder.pictureImageView.setImageResource(R.drawable.piscosour);
+        else if (salesOrderDetail.getProductId().equals("2"))
+            holder.pictureImageView.setImageResource(R.drawable.vodkaruska);
+        else if (salesOrderDetail.getProductId().equals("3"))
+            holder.pictureImageView.setImageResource(R.drawable.maracuyasour);
+        else if (salesOrderDetail.getProductId().equals("4"))
+            holder.pictureImageView.setImageResource(R.drawable.jarracerveza);
+
 
         ObtenerProducto(salesOrderDetail.getProductId(), holder);
         //holder.productoTextView.setText(salesOrderDetail.getProductId());
@@ -83,12 +93,12 @@ public class SalesOrderDetailAdapter extends RecyclerView.Adapter<SalesOrderDeta
         TextView priceTextView;
         TextView qualityTextView;
         TextView productoDescriptionTextView;
-        ANImageView pictureANImageView;
+        ImageView pictureImageView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             salesorderdetailCardView = (CardView) itemView.findViewById(R.id.salesorderdetailCardView);
-            pictureANImageView = (ANImageView) itemView.findViewById(R.id.pictureImageView);
+            pictureImageView = (ImageView) itemView.findViewById(R.id.pictureImageView);
             productoTextView = (TextView) itemView.findViewById(R.id.productoTextView);
             priceTextView = (TextView) itemView.findViewById(R.id.priceTextView);
             qualityTextView = (TextView) itemView.findViewById(R.id.qualityTextView);
