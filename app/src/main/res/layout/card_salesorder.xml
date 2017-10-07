@@ -57,6 +57,28 @@
             android:textStyle="bold"
             android:text="Tiempo Espera"
             tools:layout_editor_absoluteX="8dp" />
+        <TextView
+            android:id="@+id/anularTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            app:layout_constraintTop_toBottomOf="@+id/waittimerTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textAllCaps="true"
+            android:textColor="@color/colorAccent"
+            android:text="ANULAR"
+            tools:layout_editor_absoluteX="8dp" />
+        <TextView
+            android:id="@+id/atendidoTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            app:layout_constraintTop_toBottomOf="@+id/waittimerTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textAllCaps="true"
+            android:textColor="@color/colorAccent"
+            android:text="ATENDIDO"
+            tools:layout_editor_absoluteX="322dp" />
 
     </android.support.constraint.ConstraintLayout>
 

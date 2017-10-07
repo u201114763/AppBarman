@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pe.edu.upc.appbarman.R;
+import pe.edu.upc.appbarman.activities.MainDetailActivity;
 import pe.edu.upc.appbarman.adapters.SalesOrderDetailAdapter;
 import pe.edu.upc.appbarman.models.SalesOrderDetail;
 import pe.edu.upc.appbarman.network.NewsApiService;
@@ -31,13 +32,19 @@ public class MainDetailActivityFragment extends Fragment {
     RecyclerView.LayoutManager salesorderDetailLayoutManager;
     SalesOrderDetailAdapter salesorderDetailAdapter;
     List<SalesOrderDetail> salesOrderDetail;
+    String orderId;
 
     public MainDetailActivityFragment() {
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        MainDetailActivity activity = (MainDetailActivity) getActivity();
+        orderId = activity.getOrderId();
+        Log.d("SEGUIMIENTO","Captura de OrderId: " + orderId);
+
         View view = inflater.inflate(R.layout.fragment_main_detail, container, false);
         salesorderDetailRecyclerView = (RecyclerView) view.findViewById(R.id.salesorderdetRecyclerView);
         salesOrderDetail = new ArrayList<>();
@@ -51,12 +58,8 @@ public class MainDetailActivityFragment extends Fragment {
 
 
     private void updateSalesOrderDetail() {
-
-        Log.d("SEGUIMIENTO","ENTRO AL NETWORKINGGGGGGGGGG updateSalesOrderDetail: "+ NewsApiService.SOLESORDERDETAILS_URL+"?orderId="+"2");
-
-
-        AndroidNetworking.get(NewsApiService.SOLESORDERDETAILS_URL+"?orderId={orderId}")
-                .addPathParameter("orderId", "2")
+        AndroidNetworking.get(NewsApiService.SALESORDERDETAILS_URL +"?orderId={orderId}")
+                .addPathParameter("orderId", orderId)
                 .setPriority(Priority.LOW)
                 .setTag(getString(R.string.app_name))
                 .build()
@@ -64,7 +67,7 @@ public class MainDetailActivityFragment extends Fragment {
                     @Override
                     public void onResponse(List<SalesOrderDetail> salesOrderDetail1) {
 
-                        Log.d("SEGUIMIENTO","ENTRO AL RESPONSE: " + salesOrderDetail1.size());
+                        Log.d("SEGUIMIENTO","Numero de Detalle del Pedido: " + salesOrderDetail1.size());
                         /*for (SalesOrderDetail user : salesOrderDetail1) {
                             Log.d("SEGUIMIENTO", "producto : " + user.getProductId().toString());
                             Log.d("SEGUIMIENTO", "cantidad : " + user.getQuantity());

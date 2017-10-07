@@ -12,12 +12,8 @@ import android.view.ViewGroup;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.JSONArrayRequestListener;
-import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.androidnetworking.interfaces.ParsedRequestListener;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -53,25 +49,24 @@ public class SalesOrderFragment extends Fragment {
         salesorderLayoutManager = new GridLayoutManager(view.getContext(), 1);
         salesorderRecyclerView.setAdapter(salesorderAdapter);
         salesorderRecyclerView.setLayoutManager(salesorderLayoutManager);
-        updateSources();
+        updateSalesOrder();
         return view;
     }
 
 
-    private void updateSources() {
+    private void updateSalesOrder() {
 
-        SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyyMMdd");
+        /*SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyyMMdd");
         java.util.Date date = new java.util.Date();
+        Log.d("SEGUIMIENTO","ENTRO AL NETWORKINGGGGGGGGGG "+ DATE_FORMAT.format(date).toString());*/
 
-        Log.d("SEGUIMIENTO","ENTRO AL NETWORKINGGGGGGGGGG "+ DATE_FORMAT.format(date).toString());
         String Gbusqueda = "3";
         //String Gfecha = DATE_FORMAT.format(date).toString();
         String Gfecha ="";
-        //String Gfecha = "20171003";
         String Gvalor = "1";
         String Glocal = "1";
 
-        AndroidNetworking.get(NewsApiService.SOLESORDER_URL+"?Gbusqueda="+Gbusqueda+"&Gvalor="+Gvalor+"&Gfecha="+Gfecha+"&Glocal="+Glocal)
+        AndroidNetworking.get(NewsApiService.SALESORDER_URL +"?Gbusqueda="+Gbusqueda+"&Gvalor="+Gvalor+"&Gfecha="+Gfecha+"&Glocal="+Glocal)
                 .setPriority(Priority.LOW)
                 .setTag(getString(R.string.app_name))
                 .build()
@@ -79,7 +74,7 @@ public class SalesOrderFragment extends Fragment {
                     @Override
                     public void onResponse(List<SalesOrder> salesOrders1) {
 
-                        Log.d("SEGUIMIENTO","ENTRO AL RESPONSE: " + salesOrders1.size());
+                        Log.d("SEGUIMIENTO","Numero de Pedido:: " + salesOrders1.size());
                         /*for (SalesOrder user : salesOrders1) {
                             Log.d("SEGUIMIENTO", "id : " + user.getId().toString());
                             Log.d("SEGUIMIENTO", "userid : " + user.getUserId());
